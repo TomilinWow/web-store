@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     AppBar,
     Paper,
@@ -19,6 +19,9 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Box from "@material-ui/core/Box";
 import ToggleMenu from "../ToggleMenu/ToogleMenu";
 import {HeaderStyle} from "./HeaderStyle";
+import {fillCategory} from "../../../redux/category-reducer";
+import {connect} from "react-redux";
+import {compose} from "redux";
 
 const ButtonHeader = ({component}) => {
     return (
@@ -33,7 +36,13 @@ const ButtonHeader = ({component}) => {
 }
 
 
-function Header() {
+function Header(props) {
+
+    useEffect(() => {
+        debugger
+        props.fillCategory()
+    }, [])
+
     const classes = HeaderStyle()
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
@@ -60,7 +69,7 @@ function Header() {
                                 <Typography className={classes.title} variant="h6" noWrap>
                                     ReactStore
                                 </Typography>
-                                <ToggleMenu nameButton='Categories'  styles={classes.locale}/>
+                                <ToggleMenu nameButton='Categories' styles={classes.locale}/>
                                 <Button variant="outlined" className={classes.locale}>
                                     Orders
                                 </Button>
@@ -83,4 +92,14 @@ function Header() {
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        category: state.category.category
+    }
+}
+export default compose(
+    connect(mapStateToProps,
+        {
+            fillCategory,
+        }),
+)(Header)
