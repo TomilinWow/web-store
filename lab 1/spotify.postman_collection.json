@@ -55,6 +55,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "web service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Test name', function() {",
+							"\tlet json = pm.response.json()",
+							"\tpm.expect(json[0].name).to.eql('Smartphone')",
+							"})",
+							"pm.test(\"Test headers\", () => {",
+							"  pm.response.headers.all()",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 600ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/category/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
