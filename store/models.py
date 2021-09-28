@@ -14,7 +14,7 @@ class Product(models.Model):
 
     name = models.CharField('Name', max_length=150)
     url = models.SlugField(unique=True, max_length=150)
-    image = models.ImageField('Image', upload_to='uploads/', blank=True)
+    image = models.ImageField('Image')
     description = models.TextField('Description', null=True)
     price = models.DecimalField('Price', max_digits=6, decimal_places=2)
     category = models.ForeignKey(Category, verbose_name='products', on_delete=models.CASCADE)
