@@ -8,7 +8,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ("name",)
+        fields = ("id", "name")
 
 class ProductListSerializer(serializers.ModelSerializer):
     """List of products"""
@@ -17,8 +17,9 @@ class ProductListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     class Meta:
         model = Product
-        fields = ("name", "image", "description", "price", "category", "data_added")
+        fields = ("id", "name", "image", "description", "price", "category", "data_added")
 
     def get_image(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(obj.image.url)
+
