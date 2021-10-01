@@ -12,7 +12,7 @@ export default function BasicModal({styles}:any) {
     const handleClose = () => setOpen(false);
     const classes = ModalStyles()
     return (
-        <div>
+        <div className={classes.mt}>
             <Button onClick={handleOpen} variant="outlined" className={styles.locale}>
                 Location
             </Button>

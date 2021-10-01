@@ -1,4 +1,4 @@
-import {Grid, Paper} from "@mui/material";
+import {Button, Grid, Paper} from "@mui/material";
 import {styles} from "./ProductStyle";
 import {productType} from "../../types/product";
 import {FC} from "react";
@@ -39,9 +39,9 @@ const Product: FC<ProductType> = ({productItem}) => {
                         Price: {productItem.price} $
                     </Typography>
 
-                    <IconButton aria-label="add to shopping cart" color="secondary">
+                    <Button aria-label="add to shopping cart" >
                         <AddShoppingCartIcon/>
-                    </IconButton>
+                    </Button>
                 </Paper>
                 <Paper className={classes.paperSecond}>
                     <Typography align={"center"} variant={"h5"}>

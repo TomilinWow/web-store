@@ -11,4 +11,7 @@ export const ModalStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         p: 4,
     },
+    mt: {
+        marginRight: 10
+    }
 }))
