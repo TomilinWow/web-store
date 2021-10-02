@@ -18,4 +18,11 @@ class GetCartInfo(APIView):
     def get(self, request):
         cart = Cart(request)
         data = cart.get_cart()
-        return Response({'items': data, 'length': len(cart)})
+        return Response(data)
+
+class GetCartLength(APIView):
+
+    def get(self, request):
+        cart = Cart(request)
+        data = cart.get_cart()
+        return Response(len(data))
