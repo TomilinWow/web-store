@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Category, Product, CartProduct, Order, Cart, Customer
+from .models import Category, Product
+    # , CartProduct, Order, Cart, Customer
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,23 +18,23 @@ class ProductAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
 
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "image", "phone", "email", "location")
-
-@admin.register(CartProduct)
-class CartProductAdmin(admin.ModelAdmin):
-    """CartsProducts"""
-    list_display = ("id", "user", "cart", "price")
-
-
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    """Carts"""
-    list_display = ("id", "customer", "count_products", "price")
-
-
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    """Orders"""
-    list_display = ("id", "customer", "cart", "created_at")
+# @admin.register(Customer)
+# class CustomerAdmin(admin.ModelAdmin):
+#     list_display = ("id", "user", "image", "phone", "email", "location")
+#
+# @admin.register(CartProduct)
+# class CartProductAdmin(admin.ModelAdmin):
+#     """CartsProducts"""
+#     list_display = ("id", "user", "cart", "price")
+#
+#
+# @admin.register(Cart)
+# class CartAdmin(admin.ModelAdmin):
+#     """Carts"""
+#     list_display = ("id", "customer", "count_products", "price")
+#
+#
+# @admin.register(Order)
+# class OrderAdmin(admin.ModelAdmin):
+#     """Orders"""
+#     list_display = ("id", "customer", "cart", "created_at")

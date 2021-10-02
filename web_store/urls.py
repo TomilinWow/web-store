@@ -8,6 +8,7 @@ from store.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/v2/', include('cart.urls')),
     path('api/v1/', include('store.urls')),
     path('', index)
 
