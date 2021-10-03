@@ -16,7 +16,7 @@ export const HeaderStyle = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
         backgroundColor: '#20232a',
-        marginBottom: 20
+        marginBottom: 18
 
     },
     title: {
@@ -24,13 +24,12 @@ export const HeaderStyle = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
-        color: '#47b6d5',
+        color: '#61dafb',
         fontWeight: "bold",
         fontSize: '18px',
         marginRight: 20,
         marginTop: "auto",
         marginBottom: "auto"
-
 
     },
     photoStyle: {

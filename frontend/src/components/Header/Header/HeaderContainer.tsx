@@ -12,7 +12,10 @@ type HeaderContainerType = {
     categories: any[],
     cartLength: number
 }
-const HeaderContainer: FC<HeaderContainerType> = React.memo(({fillCategory, categories, cartLength, setLengthCart}) => {
+const HeaderContainer: FC<HeaderContainerType> = React.memo(({fillCategory,
+                                                                 categories,
+                                                                 cartLength,
+                                                                 setLengthCart}) => {
 
     useEffect(() => {
         fillCategory()

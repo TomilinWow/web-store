@@ -45,7 +45,7 @@ const productListStyles = makeStyles((theme) => ({
 
     },
     gridContent: {
-        marginTop: 15
+        marginTop: 8
     },
     cardItem: {
         backgroundColor: 'white',

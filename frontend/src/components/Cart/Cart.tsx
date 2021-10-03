@@ -7,7 +7,7 @@ import {CartFooter} from "./CartFooter";
 type CartType = {
     cart: any[]
     removeCart: () => void,
-    removeItem: (id: number) => void,
+    removeItem: (id: number, mainPrice: number, quantity: number) => void,
     decreaseItem: (price: number, productId: number) => void,
     increaseItem: (price: number, productId: number) => void,
     total: number

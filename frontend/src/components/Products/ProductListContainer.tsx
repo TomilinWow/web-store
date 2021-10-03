@@ -12,7 +12,9 @@ type ProductListContainerType = {
     productsList: any[]
 }
 
-const ProductListContainer: FC<ProductListContainerType>  = ({fillProductsList, productsList, addItemToCart}) => {
+const ProductListContainer: FC<ProductListContainerType>  = ({fillProductsList,
+                                                                 productsList,
+                                                                 addItemToCart}) => {
 
     useEffect(() => {
         fillProductsList()

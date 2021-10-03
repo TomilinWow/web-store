@@ -9,8 +9,11 @@ export enum CartActionEnum {
     INC_TOTAL = 'INC_TOTAL',
     DEC_TOTAL = 'DEC_TOTAL',
     CLEAR_CART = 'CLEAR_CART',
+    SET_TOTAL = "SET_TOTAL",
     REMOVE_ITEM = 'REMOVE_ITEM',
     SET_LENGTH = 'SET_LENGTH',
+    INC_LENGTH = 'INC_LENGTH',
+    DEC_LENGTH = 'DEC_LENGTH',
     DECREASE_COUNT_ITEM = 'DECREASE_COUNT_ITEM'
 }
 
@@ -27,7 +30,9 @@ type ClearCartActionType = {
 }
 type RemoveCartItemActionType = {
     type: CartActionEnum.REMOVE_ITEM,
-    productId: number
+    productId: number,
+    mainPrice: number,
+    quantity: number
 }
 type DecreaseCountItemActionType = {
     type: CartActionEnum.DECREASE_COUNT_ITEM,
@@ -41,6 +46,18 @@ type DecTotalActionType = {
     type: CartActionEnum.DEC_TOTAL,
     total: number
 }
+type IncLengthActionType = {
+    type: CartActionEnum.INC_LENGTH,
+}
+type DecLengthActionType = {
+    type: CartActionEnum.DEC_LENGTH,
+
+}
+type SetTotalActionType = {
+    type: CartActionEnum.SET_TOTAL,
+    total: number
+
+}
 export type CartAction = SetCartActionType
     | SetLengthCartActionType
     | ClearCartActionType
@@ -48,3 +65,6 @@ export type CartAction = SetCartActionType
     | DecreaseCountItemActionType
     | IncTotalActionType
     | DecTotalActionType
+    | DecLengthActionType
+    | IncLengthActionType
+    | SetTotalActionType

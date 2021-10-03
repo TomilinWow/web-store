@@ -37,5 +37,10 @@ export const CartAPI = {
         return instance.delete(`clear/`).then(response => {
             return response.data
         })
+    },
+    totalCart(){
+        return instance.get(`total/`).then(response => {
+            return response.data
+        })
     }
 }

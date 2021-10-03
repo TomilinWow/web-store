@@ -7,28 +7,30 @@ import {
     increaseTotalAC,
     removeCart,
     removeItem,
-    setCart,
+    setCart, setTotal,
 } from "../../store/reducers/cart/card-reducer";
 
 type CartContainerType = {
     setCart: () => void,
     removeCart: () => void,
-    removeItem: (id: number) => void,
+    removeItem: (id: number, mainPrice: number, quantity: number) => void,
     increaseTotalAC: (price: number) => void,
     decreaseTotalAC: (price: number) => void,
     decreaseCountItem: (id: number) => void,
     addItemToCart: (id: number) => void,
     cart: any[],
-    total: number
+    total: number,
+    setTotal: () => void
 }
 const CartContainer: FC<CartContainerType> = ({
                                                   setCart, cart, removeCart,
                                                   removeItem, increaseTotalAC, decreaseTotalAC,
-                                                  decreaseCountItem, addItemToCart, total
+                                                  decreaseCountItem, addItemToCart, total, setTotal
                                               }) => {
 
     useEffect(() => {
         setCart()
+        setTotal()
     }, [])
 
     const increaseItem = (price: number, productId: number) => {
@@ -67,6 +69,7 @@ export default connect(mapStateToProps, {
     increaseTotalAC,
     decreaseTotalAC,
     decreaseCountItem,
-    addItemToCart
+    addItemToCart,
+    setTotal
 
 })(CartContainer)
