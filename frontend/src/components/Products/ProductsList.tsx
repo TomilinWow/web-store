@@ -5,16 +5,17 @@ import React, {FC} from 'react';
 import {productType} from "../../types/product";
 
 type ProductsListType = {
-    productsList: productType[]
+    productsList: productType[],
+    addItemToCart: (id: number) => void
 }
 
-const ProductsList: FC<ProductsListType> = ({productsList}) => {
+const ProductsList: FC<ProductsListType> = ({productsList, addItemToCart}) => {
 
     const classes = productListStyles();
     return (
         <Grid container spacing={4} className={classes.gridContent}>
             {productsList.map( product => {
-                return <CardProduct key={product.id} product={product}/>
+                return <CardProduct key={product.id} product={product} addItemToCart={addItemToCart}/>
             })}
         </Grid>
     )

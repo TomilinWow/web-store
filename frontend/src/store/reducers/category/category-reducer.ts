@@ -1,4 +1,4 @@
-import {CategoryAPI} from "../../../api/api";
+import {CategoryAPI} from "../../../api/apiStore";
 import {CategoryAction, CategoryActionEnum, categoryState} from "./types";
 import {AppDispatch} from "../../store";
 

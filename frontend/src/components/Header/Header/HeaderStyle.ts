@@ -1,9 +1,22 @@
-import {makeStyles} from "@material-ui/core/styles";
+import {alpha, makeStyles} from "@material-ui/core/styles";
+import {Badge, styled} from "@mui/material";
+import {white} from "material-ui/styles/colors";
+
+export const StyledBadge = styled(Badge)(({theme}) => ({
+    '& .MuiBadge-badge': {
+        right: 12,
+        top: 15,
+        border: `2px solid #47b6d5`,
+        padding: '0 4px',
+        backgroundColor: '#20232a'
+    },
+}));
 
 export const HeaderStyle = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
         backgroundColor: '#20232a',
+        marginBottom: 20
 
     },
     title: {
@@ -11,7 +24,7 @@ export const HeaderStyle = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
-        color: '#61dafb',
+        color: '#47b6d5',
         fontWeight: "bold",
         fontSize: '18px',
         marginRight: 20,
@@ -33,6 +46,7 @@ export const HeaderStyle = makeStyles((theme) => ({
         height: 34,
         padding: '0 15px',
         marginRight: 10,
+        marginLeft: 2,
         background: 'linear-gradient(45deg, #61dafb 30%, #61dafb 90%)',
         boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
         whiteSpace: 'nowrap',
@@ -49,6 +63,12 @@ export const HeaderStyle = makeStyles((theme) => ({
         display: "flex",
         textDecoration: "none",
         color: "white"
+    },
+    iconButton: {
+        marginRight: 7,
+        '&:hover': {
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
+        },
     }
 
 }));

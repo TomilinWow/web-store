@@ -1,8 +1,6 @@
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Grid from "@material-ui/core/Grid";
 import productListStyles from "./ProductsListStyle";
@@ -14,10 +12,11 @@ import {productType} from "../../types/product";
 
 
 type CardProductType = {
-    product: productType
+    product: productType,
+    addItemToCart: (id:number) => void
 }
 
-const CardProduct: FC<CardProductType> = ({product}) => {
+const CardProduct: FC<CardProductType> = ({product, addItemToCart}) => {
     const classes = productListStyles()
     return (
         <Grid item={true} xs={6} sm={3}>
@@ -34,7 +33,7 @@ const CardProduct: FC<CardProductType> = ({product}) => {
                     <div className={classes.cartPriceBox}>
                         <h3 className={classes.cartName}>${product.price}</h3>
                     </div>
-                    <Button>
+                    <Button onClick={() => addItemToCart(product.id)}>
                         <AddShoppingCartIcon/>
                     </Button>
                 </Card>

@@ -4,30 +4,35 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import Header from "./Header";
 import {RootState} from "../../../store/store";
+import {setLengthCart} from "../../../store/reducers/cart/card-reducer";
 
 type HeaderContainerType = {
     fillCategory: () => void,
-    categories: any[]
+    setLengthCart: () => void,
+    categories: any[],
+    cartLength: number
 }
-const HeaderContainer: FC<HeaderContainerType> = React.memo(({fillCategory, categories}) => {
+const HeaderContainer: FC<HeaderContainerType> = React.memo(({fillCategory, categories, cartLength, setLengthCart}) => {
 
     useEffect(() => {
         fillCategory()
+        setLengthCart()
     }, [])
     return (
-
-        <Header categories={categories}/>
+        <Header categories={categories} cartLength={cartLength}/>
     )
 })
 
 const mapStateToProps = (state: RootState) => {
     return {
-        categories: state.category.categories
+        categories: state.category.categories,
+        cartLength: state.cart.cartLength
     }
 }
 export default compose(
     connect(mapStateToProps,
         {
-            fillCategory
+            fillCategory,
+            setLengthCart
         }),
 )(HeaderContainer)

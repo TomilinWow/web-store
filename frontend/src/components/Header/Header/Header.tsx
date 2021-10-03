@@ -18,12 +18,14 @@ import {HeaderStyle} from "./HeaderStyle";
 import ButtonHeader from "../../../hoc/ButtonHeader";
 import {NavLink} from "react-router-dom";
 import BasicModal from "../Modal/Modal";
+import {StyledBadge} from "./HeaderStyle";
 
 type HeaderType = {
-    categories: any[]
+    categories: any[],
+    cartLength: number
 }
 
-const Header: FC<HeaderType> = ({categories}) => {
+const Header: FC<HeaderType> = ({categories, cartLength}) => {
 
     const classes = HeaderStyle()
     const theme = useTheme();
@@ -65,10 +67,11 @@ const Header: FC<HeaderType> = ({categories}) => {
                     <BasicModal styles={classes}/>
                     <ButtonHeader component={<NotificationsRoundedIcon/>}/>
                     <NavLink to='/cart' className={classes.navlink} >
-                        <ButtonHeader component={<ShoppingCartRoundedIcon/>}/>
+                         <StyledBadge badgeContent={cartLength} color="primary">
+                            <ButtonHeader component={<ShoppingCartRoundedIcon/>}/>
+                         </StyledBadge>
                     </NavLink>
                     <ButtonHeader component={<AccountCircleRoundedIcon/>}/>
-
                 </Toolbar>
             </AppBar>
         </div>

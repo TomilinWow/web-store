@@ -18,6 +18,5 @@ export const styles = makeStyles((theme) => ({
     },
     imageProduct: {
         width: 300,
-
     },
 }))

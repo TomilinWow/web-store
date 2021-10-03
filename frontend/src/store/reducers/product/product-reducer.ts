@@ -1,4 +1,4 @@
-import {ProductAPI} from "../../../api/api";
+import {ProductAPI} from "../../../api/apiStore";
 import {ProductAction, ProductActionEnum, productState} from "./types";
 import {AppDispatch} from "../../store";
 import {productType} from "../../../types/product";
