@@ -43,6 +43,13 @@ class DeleteCartItem(APIView):
         cart.remove(product)
         return Response({'status': 'delete'})
 
+class TotalPriceCart(APIView):
+
+    def get(self, request, product_id):
+        cart = Cart(request)
+        data = cart.get_total_price()
+        return Response(data)
+
 class DecreaseCountItem(APIView):
 
     def delete(self, request, product_id):

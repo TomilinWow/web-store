@@ -58,6 +58,10 @@ class Cart(object):
     def save(self):
         self.session.modified = True
 
+    def get_total_price(self):
+        # получаем общую стоимость
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
     def remove(self, product):
         product_id = str(product.id)
         if product_id in self.cart:

@@ -6,8 +6,8 @@ urlpatterns = [
     path('cart/', views.InteractionWithCartGet.as_view()),
 
     path('clear/', views.DeleteCart.as_view()),
-    path('remove/<int:product_id>', views.DeleteCartItem.as_view()),
-    path('decrease/<int:product_id>', views.DecreaseCountItem.as_view()),
-
+    path('remove/<int:product_id>/', views.DeleteCartItem.as_view()),
+    path('decrease/<int:product_id>/', views.DecreaseCountItem.as_view()),
+    path('total/', views.TotalPriceCart.as_view()),
     path('length/', views.GetCartLength.as_view()),
 ]
