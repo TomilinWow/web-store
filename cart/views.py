@@ -5,7 +5,14 @@ from store.models import Product
 from .cart import Cart
 
 
-class AddCart(APIView):
+class InteractionWithCartGet(APIView):
+
+    def get(self, request):
+        cart = Cart(request)
+        data = cart.get_cart()
+        return Response(data)
+
+class InteractionWithCartPost(APIView):
 
     def post(self, request, product_id):
         cart = Cart(request)
@@ -13,16 +20,33 @@ class AddCart(APIView):
         cart.add(product)
         return Response({"status": "add"})
 
-class GetCartInfo(APIView):
-
-    def get(self, request):
-        cart = Cart(request)
-        data = cart.get_cart()
-        return Response(data)
 
 class GetCartLength(APIView):
 
     def get(self, request):
         cart = Cart(request)
-        data = cart.get_cart()
-        return Response(len(data))
+        data = cart.get_quantity()
+        return Response(data)
+
+class DeleteCart(APIView):
+
+    def delete(self, request):
+        cart = Cart(request)
+        cart.clear()
+        return Response({'status': 'delete'})
+
+class DeleteCartItem(APIView):
+
+    def delete(self, request, product_id):
+        cart = Cart(request)
+        product = get_object_or_404(Product, id=product_id)
+        cart.remove(product)
+        return Response({'status': 'delete'})
+
+class DecreaseCountItem(APIView):
+
+    def delete(self, request, product_id):
+        cart = Cart(request)
+        product = get_object_or_404(Product, id=product_id)
+        cart.decrease(product)
+        return Response({'status': 'decrease'})
