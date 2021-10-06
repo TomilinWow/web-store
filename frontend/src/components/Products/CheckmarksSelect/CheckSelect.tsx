@@ -22,9 +22,8 @@ const MenuProps = {
 
 type CheckSelectType = {
     categories: any[],
-    setCategoryFilterAC: (category: any[]) => void,
 }
-const CheckSelect: FC<CheckSelectType> = ({categories, setCategoryFilterAC}) => {
+const CheckSelect: FC<CheckSelectType> = ({categories}) => {
     const [checkCategories, setCheckCategories] = React.useState<string[]>([]);
     const classes = MySelectStyle();
     const handleChange = (event: any) => {
@@ -33,7 +32,6 @@ const CheckSelect: FC<CheckSelectType> = ({categories, setCategoryFilterAC}) => 
             typeof value === 'string' ? value.split(',') : value,
         );
         debugger
-        setCategoryFilterAC(checkCategories)
     };
 
     return (

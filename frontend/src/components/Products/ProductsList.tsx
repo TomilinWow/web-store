@@ -19,8 +19,6 @@ type ProductsListType = {
     fillProductsList: (id: number, sort: string, categoryFilter?: any[]) => void,
     sort: string,
     categories: any[],
-    setCategoryFilterAC: (category: any[]) => void,
-    categoryFilter: any[]
 }
 
 const ProductsList: FC<ProductsListType> = ({
@@ -31,16 +29,14 @@ const ProductsList: FC<ProductsListType> = ({
                                                 isFetching,
                                                 fillProductsList,
                                                 sort,
-                                                categories,
-                                                setCategoryFilterAC,
-                                                categoryFilter
+                                                categories
                                             }) => {
 
     const classes = productListStyles();
     return (<div>
             <div className={classes.filterSortBox}>
-                <CheckSelect setCategoryFilterAC={setCategoryFilterAC} categories={categories}/>
-                <MySelectController categoryFilter={categoryFilter} sort={sort} fillProductsList={fillProductsList}/>
+                <CheckSelect categories={categories}/>
+                <MySelectController  sort={sort} fillProductsList={fillProductsList}/>
             </div>
 
             {isFetching

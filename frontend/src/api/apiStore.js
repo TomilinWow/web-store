@@ -19,10 +19,6 @@ export const ProductAPI = {
         if (sort !== '') {
             str += `&ordering=${sort}`
         }
-        for (let filter in filters) {
-            debugger
-            str += `&category=${Number(filter) + 1}`
-        }
         return instance.get(`products/?${str}`).then(response => {
             return response.data
         })

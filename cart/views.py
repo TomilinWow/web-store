@@ -20,7 +20,6 @@ class InteractionWithCartPost(APIView):
         cart.add(product)
         return Response({"status": "add"})
 
-
 class GetCartLength(APIView):
 
     def get(self, request):

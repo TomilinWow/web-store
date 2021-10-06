@@ -4,25 +4,25 @@ import {FC} from "react";
 import CustomSelect from "./CustomSelect";
 
 type MySelectType = {
-    fillProductsList: (id: number,  sort: string, categoryFilter?: any[]) => void,
+    fillProductsList: (id: number,  sort: string) => void,
     sort: string,
-    categoryFilter: any[]
+
 }
-const MySelectController: FC<MySelectType> = ({fillProductsList, sort, categoryFilter}) => {
+const MySelectController: FC<MySelectType> = ({fillProductsList, sort}) => {
     const [mySort, setSort] = React.useState(sort);
     const classes = MySelectStyle();
 
     const handleChange = (event: any) => {
         setSort(event.target.value);
         switch (event.target.value) {
-            case 'Price (ascending)': {
-                return fillProductsList(1, 'price', categoryFilter)
+            case 1: {
+                return fillProductsList(1, 'price')
             }
-            case 'Price (descending)': {
-                return fillProductsList(1, '-price', categoryFilter)
+            case 2: {
+                return fillProductsList(1, '-price')
             }
             default:
-                return fillProductsList(1, '', categoryFilter)
+                return fillProductsList(1, '')
         }
     };
 

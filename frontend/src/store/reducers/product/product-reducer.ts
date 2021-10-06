@@ -9,7 +9,6 @@ let initialState: productState = {
     currentPage: 1,
     isFetching: false,
     sort: '',
-    categoryFilter: [],
     totalItems: 0,
     perPages: 8
 }
@@ -34,9 +33,6 @@ export const productReducer = (state = initialState, action: ProductAction) => {
         case ProductActionEnum.SET_SORT: {
             return {...state, sort: action.sort}
         }
-        case ProductActionEnum.SET_CATEGORY_FILTER: {
-            return {...state, categoryFilter: action.category}
-        }
         default:
             return state
 
@@ -59,10 +55,6 @@ export const setTotalItemsAC = (totalItems: number): ProductAction => ({
 export const setSortAC = (sort: string): ProductAction => ({
     type: ProductActionEnum.SET_SORT,
     sort
-})
-export const setCategoryFilterAC = (category: any[]): ProductAction => ({
-    type: ProductActionEnum.SET_CATEGORY_FILTER,
-    category
 })
 
 export const isFetchingAC = (isFetching: boolean): ProductAction => ({type: ProductActionEnum.IS_FETCHING, isFetching})
