@@ -11,6 +11,10 @@ const productListStyles = makeStyles((theme) => ({
             boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'
         }
     },
+    filterSortBox: {
+        display: 'flex',
+        justifyContent: "end"
+    },
 // rgba(100, 100, 111, 0.2) rgba(97, 218, 251, 1)
     cartButtonBox: {
         display: "flex",
@@ -36,8 +40,8 @@ const productListStyles = makeStyles((theme) => ({
 
     cardImage: {
         marginTop: 10,
-        maxWidth: 180,
-        maxHeight: 150,
+        maxWidth: 240,
+        maxHeight: 200,
         width: 'auto',
         height: "auto",
         marginLeft: "auto",
@@ -69,6 +73,12 @@ const productListStyles = makeStyles((theme) => ({
     link: {
         textDecoration: "none",
         color: "black"
+    },
+    paginator: {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 25,
+        marginBottom: 25
     }
 }))
 

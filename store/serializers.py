@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from .models import Category, Product
+from .models import Category, Product, City
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
@@ -10,11 +9,19 @@ class CategoryListSerializer(serializers.ModelSerializer):
         model = Category
         fields = ("id", "name")
 
+class CityListSerializer(serializers.ModelSerializer):
+    """List of category"""
+
+    class Meta:
+        model = City
+        fields = ("id", "city")
+
 class ProductListSerializer(serializers.ModelSerializer):
     """List of products"""
 
     category = serializers.SlugRelatedField(slug_field="name", read_only=True)
     image = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = ("id", "name", "image", "description", "price", "category", "data_added")

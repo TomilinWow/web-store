@@ -59,7 +59,7 @@ const ToggleMenu: FC<ToggleMenuType> = ({nameButton, categories}) => {
                 {nameButton}
             </Button>
 
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+            <Popper style={{zIndex: 10}} open={open} anchorEl={anchorRef.current} role={undefined} transition>
                 {({TransitionProps, placement}) => (
                     <Grow
                         {...TransitionProps}
@@ -69,8 +69,8 @@ const ToggleMenu: FC<ToggleMenuType> = ({nameButton, categories}) => {
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     {categories.map(c => (
-                                        <NavLink to={`/home/${c.name}`} className={classes.navlink}>
-                                            <MenuItem key={c.id} onClick={handleClose}>{c.name}</MenuItem>
+                                        <NavLink to={`/${c.name}`} className={classes.navlink}>
+                                            <MenuItem value={c.id} key={c.name} onClick={handleClose}>{c.name}</MenuItem>
                                         </NavLink>
                                     ))}
                                 </MenuList>

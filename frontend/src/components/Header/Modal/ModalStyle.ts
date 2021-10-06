@@ -9,7 +9,19 @@ export const ModalStyles = makeStyles((theme) => ({
         width: 400,
         background: "white",
         border: '2px solid #000',
-        p: 4,
+        padding: 20,
+
+    },
+
+    cityBox: {
+        display: "flex",
+        justifyContent: "center",
+        marginLeft: 55,
+        marginTop: 20,
+        marginBottom: 20
+    },
+    text: {
+        textAlign: 'center'
     },
     mt: {
         marginRight: 10

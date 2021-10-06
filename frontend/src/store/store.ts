@@ -3,12 +3,14 @@ import {categoryReducer} from "./reducers/category/category-reducer";
 import thunk from "redux-thunk";
 import {productReducer} from "./reducers/product/product-reducer";
 import {cartReducer} from "./reducers/cart/card-reducer";
+import {authReducer} from "./reducers/auth/auth-reducer";
 
 
 let reducers = combineReducers({
     category: categoryReducer,
     product: productReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    auth: authReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunk))

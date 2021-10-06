@@ -1,13 +1,21 @@
 from django.contrib import admin
 
-from .models import Category, Product
-    # , CartProduct, Order, Cart, Customer
+from .models import Category, Product, City
+
+
+# , CartProduct, Order, Cart, Customer
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Categories"""
     list_display = ("id", "name", "url")
     list_display_links = ("name",)
+
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    """Categories"""
+    list_display = ("city",)
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

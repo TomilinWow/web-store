@@ -22,10 +22,25 @@ import {StyledBadge} from "./HeaderStyle";
 
 type HeaderType = {
     categories: any[],
-    cartLength: number
+    cartLength: number,
+    searchProduct: (q: string) => void,
+    isModal: boolean,
+    cities: any[],
+    setCityAC: (city: string) => void,
+    city: string,
+    setCookie: (id: number) => void
+
 }
 
-const Header: FC<HeaderType> = ({categories, cartLength}) => {
+const Header: FC<HeaderType> = ({
+                                    categories,
+                                    cartLength,
+                                    searchProduct,
+                                    isModal,
+                                    cities,
+                                    setCityAC,
+                                    city, setCookie
+                                }) => {
 
     const classes = HeaderStyle()
     const theme = useTheme();
@@ -37,7 +52,7 @@ const Header: FC<HeaderType> = ({categories, cartLength}) => {
                     {isMatch ? (<>
                                 <Navbar/>
                                 <NavLink className={classes.navlink} to='/home'>
-                                        <img className={classes.photoStyle} src={photo}/>
+                                    <img className={classes.photoStyle} src={photo}/>
                                 </NavLink>
                                 <Box className={classes.flex}/>
 
@@ -46,13 +61,13 @@ const Header: FC<HeaderType> = ({categories, cartLength}) => {
                         :
                         (
                             <>  <NavLink to='/home' className={classes.navlink}>
-                                    <Box className={classes.photoStyle}>
-                                        <img className={classes.photoStyle} src={photo}/>
-                                    </Box>
-                                    <Typography className={classes.title} variant="h6" noWrap>
-                                        ReactStore
-                                    </Typography>
-                                </NavLink>
+                                <Box className={classes.photoStyle}>
+                                    <img className={classes.photoStyle} src={photo}/>
+                                </Box>
+                                <Typography className={classes.title} variant="h6" noWrap>
+                                    ReactStore
+                                </Typography>
+                            </NavLink>
 
                                 <ToggleMenu categories={categories} nameButton='Categories'/>
                                 <Button variant="outlined" className={classes.locale}>
@@ -63,13 +78,13 @@ const Header: FC<HeaderType> = ({categories, cartLength}) => {
                             </>)
                     }
 
-                    <Search/>
-                    <BasicModal styles={classes}/>
+                    <Search searchProduct={searchProduct}/>
+                    <BasicModal setCookie={setCookie} city={city} setCityAC={setCityAC} cities={cities} isModal={isModal} styles={classes}/>
                     <ButtonHeader component={<NotificationsRoundedIcon/>}/>
-                    <NavLink to='/cart' className={classes.navlink} >
-                         <StyledBadge badgeContent={cartLength} color="primary">
+                    <NavLink to='/cart' className={classes.navlink}>
+                        <StyledBadge badgeContent={cartLength} color="primary">
                             <ButtonHeader component={<ShoppingCartRoundedIcon/>}/>
-                         </StyledBadge>
+                        </StyledBadge>
                     </NavLink>
                     <ButtonHeader component={<AccountCircleRoundedIcon/>}/>
                 </Toolbar>

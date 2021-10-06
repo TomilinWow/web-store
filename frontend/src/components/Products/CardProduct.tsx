@@ -13,7 +13,7 @@ import {productType} from "../../types/product";
 
 type CardProductType = {
     product: productType,
-    addItemToCart: (id:number) => void
+    addItemToCart: (id: number) => void
 }
 
 const CardProduct: FC<CardProductType> = ({product, addItemToCart}) => {
@@ -21,22 +21,24 @@ const CardProduct: FC<CardProductType> = ({product, addItemToCart}) => {
     return (
         <Grid item={true} xs={6} sm={3}>
 
-                <Card className={classes.wrapper}>
-                    <CardMedia className={classes.cardImage} component={'img'} image={product.image}/>
-                    <div className={classes.cartNameBox}>
-                        <Link className={classes.link} to={PRODUCT_ROUTE + '/' + product.id}>
-                            <h3 className={classes.cartName}>{product.name}</h3>
-                        </Link>
+            <Card className={classes.wrapper}>
+                <img  className={classes.cardImage}  src={`${product.image}`} alt=""/>
+                <div className={classes.cartNameBox}>
+                    <Link className={classes.link} to={PRODUCT_ROUTE + '/' + product.id}>
+                        <h3 className={classes.cartName}>{product.name}</h3>
+                    </Link>
 
-                        <p className={classes.cartName}>{product.category}</p>
-                    </div>
-                    <div className={classes.cartPriceBox}>
-                        <h3 className={classes.cartName}>${product.price}</h3>
-                    </div>
-                    <Button onClick={() => addItemToCart(product.id)}>
-                        <AddShoppingCartIcon/>
-                    </Button>
-                </Card>
+                    <p className={classes.cartName}>{product.category}</p>
+                </div>
+                <div className={classes.cartPriceBox}>
+                    <h3 className={classes.cartName}>${product.price}</h3>
+                </div>
+                <Button style={{
+                    color: "#00b8eb",
+                }} onClick={() => addItemToCart(product.id)}>
+                    <AddShoppingCartIcon/>
+                </Button>
+            </Card>
         </Grid>
     )
 }

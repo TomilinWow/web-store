@@ -23,6 +23,20 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class City(models.Model):
+    city = models.CharField('Город', max_length=40, unique=True)
+
+    def __str__(self):
+        return self.city
+
+# class Order(models.Model):
+#
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
+#     cart = models.ForeignKey(Cart, verbose_name='cart', on_delete=models.CASCADE, null=True, blank=True)
+#     location = models.ForeignKey(City, verbose_name='city', on_delete=models.CASCADE)
+#     def __str__(self):
+#         return str(self.id)
+
 # class CartProduct(models.Model):
 #
 #     user = models.ForeignKey('Customer', verbose_name='customer', on_delete=models.CASCADE)
@@ -58,11 +72,4 @@ class Product(models.Model):
 #         return f"User: {self.user.first_name}"
 #
 #
-# class Order(models.Model):
-#
-#     customer = models.ForeignKey(Customer, verbose_name='customer', on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
-#     cart = models.ForeignKey(Cart, verbose_name='cart', on_delete=models.CASCADE, null=True, blank=True)
-#
-#     def __str__(self):
-#         return str(self.id)
+
