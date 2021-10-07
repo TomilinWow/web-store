@@ -21,5 +21,12 @@ export const CartStyle = makeStyles((theme) => ({
         fontWeight: 800,
         color: "black"
     },
+    index: {
+        fontWeight: 800
+    },
+    items: {
+        textAlign: 'left'
+    }
+
 
 }));

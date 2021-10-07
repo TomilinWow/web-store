@@ -52,3 +52,21 @@ export const AuthAPI = {
         })
     }
 }
+
+export const OrderAPI = {
+    setOrders() {
+        return instance.get(`orders/`).then(response => {
+            return response.data
+        })
+    },
+    removeOrders() {
+        return instance.delete(`remove/`).then(response => {
+            return response.data
+        })
+    },
+    postOrders(id) {
+        return instance.post(`set_order/${id}`).then(response => {
+            return response.data
+        })
+    }
+}

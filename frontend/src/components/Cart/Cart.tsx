@@ -10,11 +10,14 @@ type CartType = {
     removeItem: (id: number, mainPrice: number, quantity: number) => void,
     decreaseItem: (price: number, productId: number) => void,
     increaseItem: (price: number, productId: number) => void,
-    total: number
+    total: number,
+    postOrder: () => void
 
 }
 
-const Cart: FC<CartType> = ({cart, removeCart, removeItem, decreaseItem, increaseItem, total}) => {
+const Cart: FC<CartType> = ({cart, removeCart,
+                                removeItem, decreaseItem,
+                                increaseItem, total, postOrder}) => {
 
     return (
         <Grid container spacing={1}>
@@ -28,7 +31,7 @@ const Cart: FC<CartType> = ({cart, removeCart, removeItem, decreaseItem, increas
                                  increaseItem={increaseItem}
                 />
             })}
-            <CartFooter total={total} removeCart={removeCart}/>
+            <CartFooter postOrder={postOrder} total={total} removeCart={removeCart}/>
         </Grid>
 
     )

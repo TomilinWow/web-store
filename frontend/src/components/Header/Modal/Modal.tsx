@@ -11,7 +11,7 @@ type BasicModalType = {
     styles: any,
     isModal: boolean,
     cities: any[],
-    setCityAC: (city: string) => void,
+    setCityAC: (city: string, id: number) => void,
     city: string,
     setCookie: (id: number) => void
 }
@@ -38,7 +38,8 @@ const BasicModal: FC<BasicModalType> = React.memo(({
     const handleChange = (e: any) => {
         let city = e.target.value
         setCity(city)
-        setCityAC(cities[city - 1].city)
+        setCityAC(cities[city - 1].city, city)
+        console.log('modal-citiid', city)
         setCookie(city)
     }
 

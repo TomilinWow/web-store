@@ -19,6 +19,7 @@ import ButtonHeader from "../../../hoc/ButtonHeader";
 import {NavLink} from "react-router-dom";
 import BasicModal from "../Modal/Modal";
 import {StyledBadge} from "./HeaderStyle";
+import {RouteNames} from "../../../router";
 
 type HeaderType = {
     categories: any[],
@@ -26,19 +27,15 @@ type HeaderType = {
     searchProduct: (q: string) => void,
     isModal: boolean,
     cities: any[],
-    setCityAC: (city: string) => void,
+    setCityAC: (city: string, id: number) => void,
     city: string,
     setCookie: (id: number) => void
 
 }
 
 const Header: FC<HeaderType> = ({
-                                    categories,
-                                    cartLength,
-                                    searchProduct,
-                                    isModal,
-                                    cities,
-                                    setCityAC,
+                                    categories, cartLength, searchProduct,
+                                    isModal, cities, setCityAC,
                                     city, setCookie
                                 }) => {
 
@@ -70,16 +67,19 @@ const Header: FC<HeaderType> = ({
                             </NavLink>
 
                                 <ToggleMenu categories={categories} nameButton='Categories'/>
-                                <Button variant="outlined" className={classes.locale}>
-                                    Orders
-                                </Button>
+                                <NavLink to={RouteNames.ORDER} className={classes.navlink}>
+                                    <Button variant="outlined" className={classes.locale}>
+                                        Orders
+                                    </Button>
+                                </NavLink>
 
                                 <Box className={classes.flex}/>
                             </>)
                     }
 
                     <Search searchProduct={searchProduct}/>
-                    <BasicModal setCookie={setCookie} city={city} setCityAC={setCityAC} cities={cities} isModal={isModal} styles={classes}/>
+                    <BasicModal setCookie={setCookie} city={city} setCityAC={setCityAC} cities={cities}
+                                isModal={isModal} styles={classes}/>
                     <ButtonHeader component={<NotificationsRoundedIcon/>}/>
                     <NavLink to='/cart' className={classes.navlink}>
                         <StyledBadge badgeContent={cartLength} color="primary">

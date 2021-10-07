@@ -24,7 +24,7 @@ const CustomSelect: FC<CustomSelectType> = ({items, value, handleChange, name}) 
                     id="demo-simple-select-autowidth"
                     value={value}
                     onChange={handleChange}
-                    autoWidth
+                    fullWidth
                     label="Sorting"
                     input={<BootstrapInput/>}
                 >

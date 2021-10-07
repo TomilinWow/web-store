@@ -17,7 +17,7 @@ type HeaderContainerType = {
     isModal: boolean,
     getCookie: () => void,
     cities: any[],
-    setCityAC: (city: string) => void,
+    setCityAC: (city: string, id: number) => void,
     city: string,
     setCities: () => void,
     setCookie: (id: number) => void
@@ -37,14 +37,10 @@ const HeaderContainer: FC<HeaderContainerType> = React.memo(({
     }, [])
 
     return (
-        <Header searchProduct={searchProduct}
-                categories={categories}
-                cartLength={cartLength}
-                isModal={isModal}
-                cities={cities}
-                setCityAC={setCityAC}
-                city={city}
-                setCookie={setCookie}/>
+        <Header searchProduct={searchProduct} categories={categories}
+                cartLength={cartLength} isModal={isModal}
+                cities={cities} setCityAC={setCityAC}
+                city={city} setCookie={setCookie}/>
     )
 })
 
@@ -60,12 +56,7 @@ const mapStateToProps = (state: RootState) => {
 export default compose(
     connect(mapStateToProps,
         {
-            fillCategory,
-            setLengthCart,
-            searchProduct,
-            getCookie,
-            setCities,
-            setCityAC,
-            setCookie
+            fillCategory, setLengthCart, searchProduct, getCookie,
+            setCities, setCityAC, setCookie
         }),
 )(HeaderContainer)

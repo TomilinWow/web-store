@@ -9,6 +9,7 @@ import {
     removeItem,
     setCart, setTotal,
 } from "../../store/reducers/cart/card-reducer";
+import {postOrders} from "../../store/reducers/order/order-reducer";
 
 type CartContainerType = {
     setCart: () => void,
@@ -20,12 +21,15 @@ type CartContainerType = {
     addItemToCart: (id: number) => void,
     cart: any[],
     total: number,
-    setTotal: () => void
+    setTotal: () => void,
+    postOrders: (id: number) => void,
+    cityId: any
 }
 const CartContainer: FC<CartContainerType> = ({
                                                   setCart, cart, removeCart,
                                                   removeItem, increaseTotalAC, decreaseTotalAC,
-                                                  decreaseCountItem, addItemToCart, total, setTotal
+                                                  decreaseCountItem, addItemToCart, total,
+                                                  setTotal, postOrders, cityId
                                               }) => {
 
     useEffect(() => {
@@ -35,7 +39,7 @@ const CartContainer: FC<CartContainerType> = ({
 
     const increaseItem = (price: number, productId: number) => {
         increaseTotalAC(price)
-        if (productId !== 0){
+        if (productId !== 0) {
             addItemToCart(productId)
         }
 
@@ -45,20 +49,29 @@ const CartContainer: FC<CartContainerType> = ({
         decreaseCountItem(productId)
 
     }
+    const postOrder = () => {
+        if (cityId !== 0){
+            postOrders(cityId)
+            removeCart()
+        }
+    }
+
     return <div>
         <Cart increaseItem={increaseItem}
               decreaseItem={decreaseItem}
               removeCart={removeCart}
               removeItem={removeItem}
               cart={cart}
-              total={total}/>
+              total={total}
+              postOrder={postOrder}/>
     </div>
 }
 
 const mapStateToProps = (state: RootState) => {
     return {
         cart: state.cart.cart,
-        total: state.cart.total
+        total: state.cart.total,
+        cityId: state.auth.cityId
     }
 }
 
@@ -70,6 +83,7 @@ export default connect(mapStateToProps, {
     decreaseTotalAC,
     decreaseCountItem,
     addItemToCart,
-    setTotal
+    setTotal,
+    postOrders
 
 })(CartContainer)

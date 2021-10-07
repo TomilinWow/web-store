@@ -3,13 +3,15 @@ import {CartStyle, Item} from "./CartStyle";
 import {useTheme} from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {FC} from "react";
+import {postOrders} from "../../store/reducers/order/order-reducer";
 
 type CartFooterType = {
     removeCart: () => void,
-    total: number
+    total: number,
+    postOrder: () => void
 }
 
-export const CartFooter: FC<CartFooterType> = ({removeCart, total}) => {
+export const CartFooter: FC<CartFooterType> = ({removeCart, total, postOrder}) => {
     const classes = CartStyle()
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
@@ -26,7 +28,7 @@ export const CartFooter: FC<CartFooterType> = ({removeCart, total}) => {
                     </Grid>
                     <Grid className={classes.gridItem} item xs={3}>
                         <ButtonGroup orientation={isMatch ? 'vertical' : "horizontal"} aria-label="text button group">
-                            <Button size='medium' variant='contained' color='success'>Order</Button>
+                            <Button onClick={() => postOrder()} size='medium' variant='contained' color='success'>Order</Button>
                             <Button onClick={() => removeCart()} size='medium' color="error" variant='contained'>Clear all</Button>
                         </ButtonGroup>
                     </Grid>
