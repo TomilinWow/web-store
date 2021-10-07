@@ -15,6 +15,12 @@ class Cart(object):
     def get_cart(self):
         return self.cart
 
+    def get_products(self):
+        new_cart = []
+        for item in self.cart:
+            new_cart.append(self.cart[item])
+        return new_cart
+
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
@@ -59,7 +65,6 @@ class Cart(object):
         self.session.modified = True
 
     def get_total_price(self):
-        # получаем общую стоимость
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
     def remove(self, product):

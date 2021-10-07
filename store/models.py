@@ -29,15 +29,19 @@ class City(models.Model):
     def __str__(self):
         return self.city
 
-# class Order(models.Model):
-#
-#     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
-#     cart = models.ForeignKey(Cart, verbose_name='cart', on_delete=models.CASCADE, null=True, blank=True)
-#     location = models.ForeignKey(City, verbose_name='city', on_delete=models.CASCADE)
-#     def __str__(self):
-#         return str(self.id)
+class Order(models.Model):
 
-# class CartProduct(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
+    cart = models.ManyToManyField(Product, verbose_name='cart', null=True, blank=True)
+    location = models.ForeignKey(City, verbose_name='city', on_delete=models.CASCADE)
+
+    def get_products(self, obj):
+        return "\n".join([p.name for p in obj.cart.all()])
+
+    def __str__(self):
+        return str(self.id)
+
+# class CartProduct(models.Model):ы
 #
 #     user = models.ForeignKey('Customer', verbose_name='customer', on_delete=models.CASCADE)
 #     cart = models.ForeignKey('Cart', verbose_name='cart', on_delete=models.CASCADE, related_name='cart')

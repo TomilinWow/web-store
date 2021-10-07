@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, City
+from .models import Category, Product, City, Order
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
@@ -15,6 +15,20 @@ class CityListSerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ("id", "city")
+
+class SetOrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = ("id", "created_at", "cart", "location")
+
+class GetOrderSerializer(serializers.ModelSerializer):
+    location = serializers.SlugRelatedField(slug_field='city', read_only=True)
+    cart = serializers.SlugRelatedField(many=True, queryset=Product.objects.all(), slug_field='name')
+    class Meta:
+        model = Order
+        fields = ("id", "created_at", "cart", "location")
+
 
 class ProductListSerializer(serializers.ModelSerializer):
     """List of products"""

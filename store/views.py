@@ -8,8 +8,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Category, Product, City
-from .serializers import CategoryListSerializer, ProductListSerializer, CityListSerializer
+from cart.cart import Cart
+from .models import Category, Product, City, Order
+from .serializers import CategoryListSerializer, ProductListSerializer, CityListSerializer, \
+    SetOrderSerializer, GetOrderSerializer
 
 
 def index(request):
@@ -34,14 +36,6 @@ class CityListView(APIView):
         serializer = CityListSerializer(city, many=True)
         return Response(serializer.data)
 
-# class ProductListView(APIView):
-#
-#     pagination_class = ProductPagination
-#     def get(self, request):
-#         product = Product.objects.all()
-#         serializer = ProductListSerializer(product, context={'request': request}, many=True)
-#         return Response(serializer.data)
-
 class ProductListView(generics.ListAPIView):
     pagination_class = ProductPagination
     queryset = Product.objects.all()
@@ -55,7 +49,6 @@ class ProductDetailView(APIView):
 
     def get(self, request, pk):
         product = Product.objects.get(id=pk)
-        print(product)
         serializer = ProductListSerializer(product, context={'request': request})
         return Response(serializer.data)
 
@@ -89,3 +82,32 @@ def set_cookies(request, pk):
             city = City.objects.get(id=pk)
             response.set_cookie('location', city)
             return response
+
+@api_view(['POST'])
+def set_order(request, pk):
+    if request.method == 'POST':
+        cart = Cart(request)
+        order = SetOrderSerializer(data={
+            'cart': cart.get_cart(),
+            'location': pk
+        })
+        if order.is_valid():
+            order.save()
+            return HttpResponse(status=200)
+
+        return HttpResponse(status=400)
+
+class OrdersDetailView(APIView):
+
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = GetOrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+
+class OrdersListView(APIView):
+
+    def delete(self, request):
+        orders = Order.objects.all()
+        orders.delete()
+        return Response(status=200)

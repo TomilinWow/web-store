@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product, City
+from .models import Category, Product, City, Order
 
 
 # , CartProduct, Order, Cart, Customer
@@ -16,6 +16,13 @@ class CityAdmin(admin.ModelAdmin):
     """Categories"""
     list_display = ("city",)
 
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    """Categories"""
+    list_display = ("id", "created_at", "get_products", "location")
+
+    def get_products(self, obj):
+        return "\n".join([p.name for p in obj.cart.all()])
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
