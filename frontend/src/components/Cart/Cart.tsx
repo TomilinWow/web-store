@@ -8,8 +8,8 @@ type CartType = {
     cart: any[]
     removeCart: () => void,
     removeItem: (id: number, mainPrice: number, quantity: number) => void,
-    decreaseItem: (price: number, productId: number) => void,
-    increaseItem: (price: number, productId: number) => void,
+    decreaseItem: (price: number, productId: number, quantity: number) => void,
+    increaseItem: (price: number, productId: number, quantity: number) => void,
     total: number,
     postOrder: () => void
 

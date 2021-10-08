@@ -3,7 +3,7 @@ import ProductsList from "./ProductsList";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {
-    fillProductsList,
+    fillProductsList, setFiltersAC,
 } from "../../store/reducers/product/product-reducer";
 import {RootState} from "../../store/store";
 import {addItemToCart} from "../../store/reducers/cart/card-reducer";
@@ -11,6 +11,7 @@ import {addItemToCart} from "../../store/reducers/cart/card-reducer";
 type ProductListContainerType = {
     fillProductsList: (id: number, sort: string, categoryFilter?: any[]) => void,
     addItemToCart: (id: number) => void,
+    setFiltersAC: (filter: any[]) => void
     productsList: any[],
     currentPage: number,
     isFetching: boolean,
@@ -18,12 +19,15 @@ type ProductListContainerType = {
     perPages: number,
     sort: string,
     categories: any[],
+    filters: any[]
 }
 
 const ProductListContainer: FC<ProductListContainerType> = ({
                                                                 fillProductsList, productsList, addItemToCart,
                                                                 currentPage, isFetching, perPages,
-                                                                totalItems, sort, categories,
+                                                                totalItems, sort, categories, setFiltersAC,
+                                                                filters
+
                                                             }) => {
 
     useEffect(() => {
@@ -31,14 +35,14 @@ const ProductListContainer: FC<ProductListContainerType> = ({
     }, []);
     const pages = Math.ceil(totalItems / perPages)
 
-    const changePage = (curPage: number, sort: string) => {
-        fillProductsList(curPage, sort)
+    const changePage = (curPage: number, newsort= sort , newfilters = filters) => {
+        fillProductsList(curPage, newsort, newfilters)
     }
 
     return <ProductsList productsList={productsList} addItemToCart={addItemToCart} currentPage={currentPage}
                          changePage={changePage} isFetching={isFetching} pages={pages}
-                         fillProductsList={fillProductsList} sort={sort}
-                         categories={categories}
+                         sort={sort} filters={filters}
+                         categories={categories} setFiltersAC={setFiltersAC}
     />
 }
 
@@ -51,6 +55,7 @@ const mapStateToProps = (state: RootState) => {
         perPages: state.product.perPages,
         sort: state.product.sort,
         categories: state.category.categories,
+        filters: state.product.filters
     }
 }
 
@@ -58,5 +63,6 @@ export default compose(
     connect(mapStateToProps, {
         fillProductsList,
         addItemToCart,
+        setFiltersAC,
     })
 )(ProductListContainer)

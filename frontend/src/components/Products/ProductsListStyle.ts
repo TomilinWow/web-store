@@ -8,7 +8,7 @@ const productListStyles = makeStyles((theme) => ({
         width: "100%",
         height: "100%",
         '&:hover': {
-            boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'
+            boxShadow: 'rgba(100, 100, 111, 0.30) 0px 15px 29px 0px;'
         }
     },
     filterSortBox: {

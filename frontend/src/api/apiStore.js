@@ -19,6 +19,11 @@ export const ProductAPI = {
         if (sort !== '') {
             str += `&ordering=${sort}`
         }
+        let categories = ''
+        for (let filter in filters) {
+            categories += `${filters[filter]},`
+        }
+        str += `&category=${categories}`
         return instance.get(`products/?${str}`).then(response => {
             return response.data
         })
@@ -36,7 +41,7 @@ export const ProductAPI = {
 }
 
 export const AuthAPI = {
-    getCookie(q) {
+    getCookie() {
         return instance.get(`cookies`).then(response => {
             return response.data
         })

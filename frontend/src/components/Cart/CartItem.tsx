@@ -13,21 +13,25 @@ type CartType = {
     item: cartItemType,
     number: number
     removeItem: (id: number, mainPrice: number, quantity: number) => void,
-    decreaseItem: (price: number, productId: number) => void,
-    increaseItem: (price: number, productId: number) => void,
+    decreaseItem: (price: number, productId: number, quantity: number) => void,
+    increaseItem: (price: number, productId: number, quantity: number) => void,
 }
 
 const CartItem: FC<CartType> = ({item, number, removeItem, decreaseItem, increaseItem}) => {
 
     const [quantity, setQuantity] = useState(item.quantity)
 
+    useEffect(()=> {
+        setQuantity(item.quantity)
+    }, [])
+
     const increaseQuantity = () => {
         setQuantity(quantity + 1)
-        increaseItem(Number(item.price), item.id)
+        increaseItem(Number(item.price), item.id, quantity + 1)
     }
     const decreaseQuantity = () => {
         setQuantity(quantity - 1)
-        decreaseItem(Number(item.price), item.id)
+        decreaseItem(Number(item.price), item.id, quantity + 1)
     }
 
     const classes = CartStyle()

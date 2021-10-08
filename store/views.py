@@ -12,6 +12,7 @@ from cart.cart import Cart
 from .models import Category, Product, City, Order
 from .serializers import CategoryListSerializer, ProductListSerializer, CityListSerializer, \
     SetOrderSerializer, GetOrderSerializer
+from .service import ProductFilter
 
 
 def index(request):
@@ -41,6 +42,7 @@ class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     filter_backends = (OrderingFilter, DjangoFilterBackend)
+    filterset_class = ProductFilter
     filter_fields = ('category', 'category__name')
     ordering_fields = ('price', 'name')
 

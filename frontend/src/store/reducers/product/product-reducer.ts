@@ -9,6 +9,7 @@ let initialState: productState = {
     currentPage: 1,
     isFetching: false,
     sort: '',
+    filters: [],
     totalItems: 0,
     perPages: 8
 }
@@ -33,6 +34,10 @@ export const productReducer = (state = initialState, action: ProductAction) => {
         case ProductActionEnum.SET_SORT: {
             return {...state, sort: action.sort}
         }
+        case ProductActionEnum.SET_FILTERS: {
+            return {...state, filters: action.filters}
+        }
+
         default:
             return state
 
@@ -48,14 +53,22 @@ export const setCurrentPageAC = (currentPage: number): ProductAction => ({
     type: ProductActionEnum.SET_CURRENT_PAGE,
     currentPage
 })
+
 export const setTotalItemsAC = (totalItems: number): ProductAction => ({
     type: ProductActionEnum.SET_TOTAL_ITEMS,
     totalItems
 })
+
 export const setSortAC = (sort: string): ProductAction => ({
     type: ProductActionEnum.SET_SORT,
     sort
 })
+
+export const setFiltersAC = (filters: any[]): ProductAction => ({
+    type: ProductActionEnum.SET_FILTERS,
+    filters
+})
+
 
 export const isFetchingAC = (isFetching: boolean): ProductAction => ({type: ProductActionEnum.IS_FETCHING, isFetching})
 
@@ -63,7 +76,7 @@ export const isFetchingAC = (isFetching: boolean): ProductAction => ({type: Prod
 export const fillProductsList = (currentPage: number, sort: string, filters?: any[]) => {
     return async (dispatch: AppDispatch) => {
         dispatch(isFetchingAC(true))
-        debugger
+
         const data = await ProductAPI.getProducts(currentPage, 8, sort, filters)
         if (data) {
             dispatch(fillProductsAC(data.results))

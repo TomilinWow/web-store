@@ -4,11 +4,12 @@ import {FC} from "react";
 import CustomSelect from "./CustomSelect";
 
 type MySelectType = {
-    fillProductsList: (id: number,  sort: string) => void,
+    changePage: (id: number, sort: string,  categoryFilter?: any[]) => void,
     sort: string,
+    filters: any[]
 
 }
-const MySelectController: FC<MySelectType> = ({fillProductsList, sort}) => {
+const MySelectController: FC<MySelectType> = ({changePage, sort, filters}) => {
     const [mySort, setSort] = React.useState(sort);
     const classes = MySelectStyle();
 
@@ -16,13 +17,13 @@ const MySelectController: FC<MySelectType> = ({fillProductsList, sort}) => {
         setSort(event.target.value);
         switch (event.target.value) {
             case 1: {
-                return fillProductsList(1, 'price')
+                return changePage(1, 'price', filters)
             }
             case 2: {
-                return fillProductsList(1, '-price')
+                return changePage(1, '-price', filters)
             }
             default:
-                return fillProductsList(1, '')
+                return changePage(1, '', filters)
         }
     };
 

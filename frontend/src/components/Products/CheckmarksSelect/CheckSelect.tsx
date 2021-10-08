@@ -22,16 +22,21 @@ const MenuProps = {
 
 type CheckSelectType = {
     categories: any[],
+    setFilters: (filter: any[]) => void,
+    changePage: (id: number, sort: string, filters: any[]) => void,
+    sort: string,
 }
-const CheckSelect: FC<CheckSelectType> = ({categories}) => {
+const CheckSelect: FC<CheckSelectType> = ({categories, setFilters, changePage, sort}) => {
     const [checkCategories, setCheckCategories] = React.useState<string[]>([]);
     const classes = MySelectStyle();
     const handleChange = (event: any) => {
         const value = event.target.value
+        setFilters(value)
+
         setCheckCategories(
             typeof value === 'string' ? value.split(',') : value,
         );
-        debugger
+        changePage(1, sort, value)
     };
 
     return (
@@ -48,7 +53,7 @@ const CheckSelect: FC<CheckSelectType> = ({categories}) => {
                     renderValue={(selected) => selected.join(', ')}
                 >
                     {categories.map((category) => (
-                        <MenuItem key={category} value={category.name}>
+                        <MenuItem key={category.name} value={category.name}>
                             <Checkbox checked={checkCategories.indexOf(category.name) > -1}/>
                             <ListItemText primary={category.name}/>
                         </MenuItem>

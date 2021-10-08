@@ -6,7 +6,6 @@ class Category(models.Model):
 
     name = models.CharField('Category', max_length=100)
     url = models.SlugField(unique=True, max_length=150)
-
     def __str__(self):
         return self.name
 

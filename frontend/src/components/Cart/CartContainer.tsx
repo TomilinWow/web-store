@@ -15,8 +15,8 @@ type CartContainerType = {
     setCart: () => void,
     removeCart: () => void,
     removeItem: (id: number, mainPrice: number, quantity: number) => void,
-    increaseTotalAC: (price: number) => void,
-    decreaseTotalAC: (price: number) => void,
+    increaseTotalAC: (price: number,  productId: number, quantity: number) => void,
+    decreaseTotalAC: (price: number,  productId: number, quantity: number) => void,
     decreaseCountItem: (id: number) => void,
     addItemToCart: (id: number) => void,
     cart: any[],
@@ -37,15 +37,15 @@ const CartContainer: FC<CartContainerType> = ({
         setTotal()
     }, [])
 
-    const increaseItem = (price: number, productId: number) => {
-        increaseTotalAC(price)
+    const increaseItem = (price: number, productId: number,  quantity: number) => {
+        increaseTotalAC(price, productId, quantity)
         if (productId !== 0) {
             addItemToCart(productId)
         }
 
     }
-    const decreaseItem = (price: number, productId: number) => {
-        decreaseTotalAC(price)
+    const decreaseItem = (price: number, productId: number, quantity: number) => {
+        decreaseTotalAC(price, productId, quantity)
         decreaseCountItem(productId)
 
     }

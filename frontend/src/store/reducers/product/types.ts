@@ -8,6 +8,7 @@ export type productState = {
     totalItems: number,
     perPages: number,
     sort: string,
+    filters: any
 }
 
 export enum ProductActionEnum {
@@ -17,6 +18,8 @@ export enum ProductActionEnum {
     IS_FETCHING = 'IS_FETCHING',
     SET_TOTAL_ITEMS = 'SET_TOTAL_ITEMS',
     SET_SORT = 'SET_SORT',
+    SET_FILTERS = 'SET_FILTERS',
+
 
 }
 
@@ -46,6 +49,11 @@ type SetSortType = {
     type: ProductActionEnum.SET_SORT,
     sort: string
 }
+type SetFiltersType = {
+    type: ProductActionEnum.SET_FILTERS,
+    filters: any[]
+}
+
 
 export type ProductAction = FillProductActionType
     | GetProductDetailType
@@ -53,3 +61,4 @@ export type ProductAction = FillProductActionType
     | IsFetchingType
     | SetTotalItemsType
     | SetSortType
+    | SetFiltersType

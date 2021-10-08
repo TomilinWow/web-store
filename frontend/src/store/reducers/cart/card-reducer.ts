@@ -29,10 +29,35 @@ export const cartReducer = (state = initialState, action: CartAction) => {
             return {...state, cart: [], total: 0, cartLength: 0}
         }
         case CartActionEnum.INC_TOTAL: {
-            return {...state, total: state.total + action.total}
+            return {
+                ...state,
+                total: state.total + action.total,
+                cart: state.cart.map(item => {
+                    if (item.id === action.productId) {
+                        return {
+                            ...item,
+                            quantity: action.quantity,
+                        }
+                    }
+                    return item;
+                })
+            }
         }
         case CartActionEnum.DEC_TOTAL: {
-            return {...state, total: state.total - action.total}
+            return {
+                ...state,
+                total: state.total - action.total,
+                cart: state.cart.map(item => {
+                    if (item.id === action.productId) {
+                        return {
+                            ...item,
+                            quantity: action.quantity,
+                        }
+                    }
+                    return item;
+                })
+
+            }
         }
         case CartActionEnum.INC_LENGTH: {
             return {...state, cartLength: state.cartLength + 1}
@@ -54,13 +79,17 @@ export const setLengthAC = (cartLength: number): CartAction => ({
     cartLength
 })
 
-export const increaseTotalAC = (total: number): CartAction => ({
+export const increaseTotalAC = (total: number, productId: number, quantity: number): CartAction => ({
     type: CartActionEnum.INC_TOTAL,
-    total
+    total,
+    productId,
+    quantity
 })
-export const decreaseTotalAC = (total: number): CartAction => ({
+export const decreaseTotalAC = (total: number, productId: number, quantity: number): CartAction => ({
     type: CartActionEnum.DEC_TOTAL,
-    total
+    total,
+    productId,
+    quantity
 })
 export const setCartAC = (cartItems: any[]): CartAction => ({
     type: CartActionEnum.SET_CART,
@@ -92,6 +121,11 @@ export const setTotalAC = (total: number): CartAction => ({
     total
 })
 
+export const setTestAC = (id: number): CartAction => ({
+    type: CartActionEnum.SET_TEST,
+    id
+})
+
 export const setTotal = () => {
     return async (dispatch: AppDispatch) => {
         const data = await CartAPI.totalCart()
@@ -103,6 +137,7 @@ export const setCart = () => {
     return async (dispatch: AppDispatch) => {
         const data = await CartAPI.getCart()
         const values = Object.values(data)
+        console.log(values)
         dispatch(setCartAC(values))
     }
 }
