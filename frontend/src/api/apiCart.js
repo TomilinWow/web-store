@@ -8,13 +8,11 @@ const instance = axios.create({
 export const CartAPI = {
     getCart(){
         return instance.get("cart/").then(response => {
-            console.log(response)
             return response.data
         })
     },
     getLengthCart(){
         return instance.get("length/").then(response => {
-            console.log(response)
             return response.data
         })
     },
