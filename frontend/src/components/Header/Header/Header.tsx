@@ -27,15 +27,14 @@ type HeaderType = {
     searchProduct: (q: string) => void,
     isModal: boolean,
     cities: any[],
-    setCityAC: (city: string, id: number) => void,
     city: string,
-    setCookie: (id: number) => void
+    setCookie: (city: string) => void
 
 }
 
 const Header: FC<HeaderType> = ({
                                     categories, cartLength, searchProduct,
-                                    isModal, cities, setCityAC,
+                                    isModal, cities,
                                     city, setCookie
                                 }) => {
 
@@ -78,7 +77,7 @@ const Header: FC<HeaderType> = ({
                     }
 
                     <Search searchProduct={searchProduct}/>
-                    <BasicModal setCookie={setCookie} city={city} setCityAC={setCityAC} cities={cities}
+                    <BasicModal setCookie={setCookie} city={city} cities={cities}
                                 isModal={isModal} styles={classes}/>
                     <ButtonHeader component={<NotificationsRoundedIcon/>}/>
                     <NavLink to='/cart' className={classes.navlink}>

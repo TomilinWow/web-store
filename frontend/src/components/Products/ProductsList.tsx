@@ -3,21 +3,21 @@ import productListStyles from "./ProductsListStyle";
 import CardProduct from "./CardProduct";
 import React, {FC, useState} from 'react';
 import {productType} from "../../types/product";
-import MySelect from "../Select/MySelectController";
 import MyPagination from "../Paginator/Paginator";
 import Loader from "../Loader/Loader";
 import CheckSelect from "./CheckmarksSelect/CheckSelect";
-import MySelectController from "../Select/MySelectController";
+import MySelectController from "./Select/MySelect";
 import FlashMessage from "../FlashMessage/FlashMessage";
 
 type ProductsListType = {
     productsList: productType[],
     addItemToCart: (id: number) => void,
     currentPage: number,
-    changePage: (id: number, sort: string,  categoryFilter?: any[]) => void,
+    changePage: (id: number) => void,
     isFetching: boolean,
     pages: number,
-    setFiltersAC: (filter: any[]) => void
+    setCurrentFilters: (filter: any[]) => void
+    setCurrentSort: (sort: string) => void
     sort: string,
     categories: any[],
     filters: any[]
@@ -26,15 +26,15 @@ type ProductsListType = {
 const ProductsList: FC<ProductsListType> = ({
                                                 productsList, addItemToCart, pages,
                                                 changePage, isFetching,
-                                                sort, categories, setFiltersAC, filters
+                                                sort, categories, setCurrentFilters, setCurrentSort
                                             }) => {
 
     const [state, setState] = useState(false)
     const classes = productListStyles();
     return (<div>
             <div className={classes.filterSortBox}>
-                <CheckSelect sort={sort} changePage={changePage} setFilters={setFiltersAC} categories={categories}/>
-                <MySelectController changePage={changePage} filters={filters} sort={sort}/>
+                <CheckSelect setCurrentFilters={setCurrentFilters} categories={categories}/>
+                <MySelectController setCurrentSort={setCurrentSort} sort={sort}/>
             </div>
 
             {isFetching
@@ -48,7 +48,7 @@ const ProductsList: FC<ProductsListType> = ({
                 </React.Fragment>
             }
             <div className={classes.paginator}>
-                <MyPagination sort={sort} pages={pages} changePage={changePage}/>
+                <MyPagination pages={pages} changePage={changePage}/>
             </div>
             {state ? <FlashMessage message={"Product added!"} type={"success"}/>: <div></div>}
         </div>

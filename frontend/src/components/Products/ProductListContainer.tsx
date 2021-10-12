@@ -3,7 +3,7 @@ import ProductsList from "./ProductsList";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {
-    fillProductsList, setFiltersAC,
+    fillProductsList, setFiltersAC, setSortAC,
 } from "../../store/reducers/product/product-reducer";
 import {RootState} from "../../store/store";
 import {addItemToCart} from "../../store/reducers/cart/card-reducer";
@@ -19,30 +19,42 @@ type ProductListContainerType = {
     perPages: number,
     sort: string,
     categories: any[],
-    filters: any[]
+    filters: any[],
+    setSortAC: (sort: string) => void
 }
 
 const ProductListContainer: FC<ProductListContainerType> = ({
                                                                 fillProductsList, productsList, addItemToCart,
                                                                 currentPage, isFetching, perPages,
                                                                 totalItems, sort, categories, setFiltersAC,
-                                                                filters
+                                                                filters, setSortAC
 
                                                             }) => {
 
     useEffect(() => {
-        fillProductsList(currentPage, sort)
+        fillProductsList(currentPage, sort, filters)
     }, []);
+
     const pages = Math.ceil(totalItems / perPages)
 
-    const changePage = (curPage: number, newsort= sort , newfilters = filters) => {
-        fillProductsList(curPage, newsort, newfilters)
+    const setCurrentFilters = (filters: any[]) => {
+        fillProductsList(currentPage, sort, filters)
+        setFiltersAC(filters)
+    }
+
+    const setCurrentSort = (sort: string) => {
+        fillProductsList(currentPage, sort, filters)
+        setSortAC(sort)
+    }
+
+    const changePage = (curPage: number) => {
+        fillProductsList(curPage, sort, filters)
     }
 
     return <ProductsList productsList={productsList} addItemToCart={addItemToCart} currentPage={currentPage}
                          changePage={changePage} isFetching={isFetching} pages={pages}
-                         sort={sort} filters={filters}
-                         categories={categories} setFiltersAC={setFiltersAC}
+                         sort={sort} filters={filters} setCurrentSort={setCurrentSort}
+                         categories={categories} setCurrentFilters={setCurrentFilters}
     />
 }
 
@@ -64,5 +76,6 @@ export default compose(
         fillProductsList,
         addItemToCart,
         setFiltersAC,
+        setSortAC
     })
 )(ProductListContainer)

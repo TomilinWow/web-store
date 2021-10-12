@@ -1,7 +1,7 @@
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import MySelectStyle, {BootstrapInput} from "./MySelectStyle";
+import MySelectStyle, {BootstrapInput} from "../../../../style/MySelectStyle";
 import MenuItem from "@mui/material/MenuItem";
 import * as React from "react";
 import {FC} from "react";
@@ -29,7 +29,7 @@ const CustomSelect: FC<CustomSelectType> = ({items, value, handleChange, name}) 
                     input={<BootstrapInput/>}
                 >
                     {items.map(item => {
-                        return <MenuItem value={item.id}>{item.city}</MenuItem>
+                        return <MenuItem key={item.city} value={item.id}>{item.city}</MenuItem>
                     })}
                 </Select>
             </FormControl>

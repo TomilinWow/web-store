@@ -41,16 +41,6 @@ export const ProductAPI = {
 }
 
 export const AuthAPI = {
-    getCookie() {
-        return instance.get(`cookies`).then(response => {
-            return response.data
-        })
-    },
-    setCookie(id) {
-        return instance.post(`set_cookies/${id}`).then(response => {
-            return response.data
-        })
-    },
     setCities() {
         return instance.get(`cities/`).then(response => {
             return response.data
@@ -69,8 +59,8 @@ export const OrderAPI = {
             return response.data
         })
     },
-    postOrders(id) {
-        return instance.post(`set_order/${id}`).then(response => {
+    postOrders() {
+        return instance.post(`set_order/`).then(response => {
             return response.data
         })
     }

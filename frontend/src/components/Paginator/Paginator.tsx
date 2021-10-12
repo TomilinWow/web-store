@@ -5,17 +5,16 @@ import {PaginatorStyles} from "./PaginatorStyle";
 import {FC} from "react";
 
 type MyPaginationType = {
-    changePage: (curPage: number, sort: string) => void,
+    changePage: (curPage: number) => void,
     pages: number,
-    sort: string
 }
 
-const MyPagination: FC<MyPaginationType> = ({changePage, pages, sort}) => {
+const MyPagination: FC<MyPaginationType> = ({changePage, pages}) => {
     const classes = PaginatorStyles()
     return (
         <Stack spacing={2}>
             <Pagination
-                onChange={(e:any) => changePage(Number(e.target.textContent), sort)}
+                onChange={(e:any) => changePage(Number(e.target.textContent))}
                 className={classes.root}
                 count={pages}/>
         </Stack>

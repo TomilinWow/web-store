@@ -22,14 +22,13 @@ type CartContainerType = {
     cart: any[],
     total: number,
     setTotal: () => void,
-    postOrders: (id: number) => void,
-    cityId: any
+    postOrders: () => void,
 }
 const CartContainer: FC<CartContainerType> = ({
                                                   setCart, cart, removeCart,
                                                   removeItem, increaseTotalAC, decreaseTotalAC,
                                                   decreaseCountItem, addItemToCart, total,
-                                                  setTotal, postOrders, cityId
+                                                  setTotal, postOrders
                                               }) => {
 
     useEffect(() => {
@@ -42,19 +41,19 @@ const CartContainer: FC<CartContainerType> = ({
         if (productId !== 0) {
             addItemToCart(productId)
         }
-
     }
+
     const decreaseItem = (price: number, productId: number, quantity: number) => {
         decreaseTotalAC(price, productId, quantity)
         decreaseCountItem(productId)
 
     }
+
     const postOrder = () => {
-        if (cityId !== 0){
-            postOrders(cityId)
+            postOrders()
             removeCart()
-        }
     }
+
 
     return <div>
         <Cart increaseItem={increaseItem}
@@ -65,13 +64,13 @@ const CartContainer: FC<CartContainerType> = ({
               total={total}
               postOrder={postOrder}/>
     </div>
+
 }
 
 const mapStateToProps = (state: RootState) => {
     return {
         cart: state.cart.cart,
         total: state.cart.total,
-        cityId: state.auth.cityId
     }
 }
 

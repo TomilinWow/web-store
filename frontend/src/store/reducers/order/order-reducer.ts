@@ -50,10 +50,10 @@ export const removeOrders = () => {
     }
 }
 
-export const postOrders = (id: number) => {
+export const postOrders = () => {
     return async (dispatch: AppDispatch) => {
         try {
-            await OrderAPI.postOrders(id)
+            await OrderAPI.postOrders()
             dispatch(removeOrdersAC())
         } catch (e) {
 

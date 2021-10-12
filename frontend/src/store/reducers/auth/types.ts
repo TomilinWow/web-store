@@ -1,8 +1,7 @@
 export type authState = {
     cities: any[],
     isModal: boolean,
-    city: any,
-    cityId: number
+    city: any
 }
 
 export enum AuthActionEnum {
@@ -11,12 +10,6 @@ export enum AuthActionEnum {
     SET_COOKIE = 'SET_COOKIE',
     SET_AUTH = 'SET_AUTH',
     SET_CITY_FROM_COOKIE = 'SET_CITY_FROM_COOKIE'
-}
-
-type SetCityActionType = {
-    type: AuthActionEnum.SET_CITY,
-    city: string,
-    id: number
 }
 
 type SetCookieCartActionType = {
@@ -37,7 +30,7 @@ type SetCityFromCookieType = {
     city: string
 }
 
-export type AuthAction = SetCityActionType
+export type AuthAction =
     | SetCookieCartActionType
     | SetAuthActionType
     | SetCitiesType

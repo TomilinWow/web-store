@@ -6,14 +6,10 @@ let initialState: authState = {
     cities: [],
     isModal: false,
     city: 'LOCATION',
-    cityId: 0
 }
 
 export const authReducer = (state = initialState, action: AuthAction) => {
     switch (action.type) {
-        case AuthActionEnum.SET_CITY: {
-            return {...state, city: action.city, cityId: action.id}
-        }
          case AuthActionEnum.SET_CITY_FROM_COOKIE: {
             return {...state, city: action.city}
         }
@@ -21,15 +17,7 @@ export const authReducer = (state = initialState, action: AuthAction) => {
             return {...state, isModal: action.isModal}
         }
         case AuthActionEnum.SET_CITIES: {
-            let cityId = 0
-            for (let i = 0; i < action.cities.length; i++) {
-               if (action.cities[i].city === state.city){
-                   console.log('cityiesId', action.cities[i].city)
-                   cityId = action.cities[i].id
-                   console.log('cityId', cityId)
-               }
-            }
-            return {...state, cities: action.cities, cityId: cityId}
+            return {...state, cities: action.cities}
         }
         default:
             return state
@@ -46,36 +34,31 @@ export const setCitiesAC = (cities: any[]): AuthAction => ({
     cities
 })
 
-export const setCityAC = (city: string, id: number): AuthAction => ({
-    type: AuthActionEnum.SET_CITY,
-    city: city,
-    id: id
-})
-
 export const setCityFromCookieAC = (city: string): AuthAction => ({
     type: AuthActionEnum.SET_CITY_FROM_COOKIE,
     city: city,
 
 })
+
 export const getCookie = () => {
     return async (dispatch: AppDispatch) => {
-        try {
-            const data = await AuthAPI.getCookie()
-            dispatch(setCityFromCookieAC(data))
-        } catch (e) {
+        const data = document.cookie.match(/location=(.+?)(;|$)/)
+        if (data) {
+            dispatch(setCityFromCookieAC(data[1]))
+        } else {
             dispatch(setIsModalAC(true))
         }
     }
 }
-export const setCookie = (id: number) => {
-    return async (dispatch: AppDispatch) => {
-        try {
-            const data = await AuthAPI.setCookie(id)
-        } catch (e) {
 
-        }
+
+export const setCookie = (location: string) => {
+    return async (dispatch: AppDispatch) => {
+        document.cookie = `location=${location}`
+        dispatch(setCityFromCookieAC(location))
     }
 }
+
 
 export const setCities = () => {
     return async (dispatch: AppDispatch) => {

@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import MySelectStyle, {BootstrapInput} from "../../Select/MySelectStyle";
+import MySelectStyle, {BootstrapInput} from "../../../style/MySelectStyle";
 import {FC} from "react";
 
 const ITEM_HEIGHT = 48;
@@ -22,21 +22,17 @@ const MenuProps = {
 
 type CheckSelectType = {
     categories: any[],
-    setFilters: (filter: any[]) => void,
-    changePage: (id: number, sort: string, filters: any[]) => void,
-    sort: string,
+    setCurrentFilters: (filter: any[]) => void,
 }
-const CheckSelect: FC<CheckSelectType> = ({categories, setFilters, changePage, sort}) => {
+const CheckSelect: FC<CheckSelectType> = ({categories, setCurrentFilters}) => {
     const [checkCategories, setCheckCategories] = React.useState<string[]>([]);
     const classes = MySelectStyle();
     const handleChange = (event: any) => {
         const value = event.target.value
-        setFilters(value)
-
         setCheckCategories(
             typeof value === 'string' ? value.split(',') : value,
         );
-        changePage(1, sort, value)
+        setCurrentFilters(value)
     };
 
     return (

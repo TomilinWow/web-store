@@ -121,11 +121,6 @@ export const setTotalAC = (total: number): CartAction => ({
     total
 })
 
-export const setTestAC = (id: number): CartAction => ({
-    type: CartActionEnum.SET_TEST,
-    id
-})
-
 export const setTotal = () => {
     return async (dispatch: AppDispatch) => {
         const data = await CartAPI.totalCart()
@@ -137,7 +132,6 @@ export const setCart = () => {
     return async (dispatch: AppDispatch) => {
         const data = await CartAPI.getCart()
         const values = Object.values(data)
-        console.log(values)
         dispatch(setCartAC(values))
     }
 }
@@ -170,7 +164,7 @@ export const setLengthCart = () => {
 
 export const addItemToCart = (itemId: number) => {
     return async (dispatch: AppDispatch) => {
-        const data = await CartAPI.addItem(itemId)
+        await CartAPI.addItem(itemId)
         dispatch(incLengthItemAC())
     }
 }

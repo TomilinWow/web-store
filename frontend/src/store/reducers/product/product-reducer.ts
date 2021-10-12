@@ -6,10 +6,10 @@ import {productType} from "../../../types/product";
 let initialState: productState = {
     products: [],
     product: null as productType | null,
-    currentPage: 1,
     isFetching: false,
     sort: '',
     filters: [],
+    currentPage: 1,
     totalItems: 0,
     perPages: 8
 }
@@ -82,7 +82,6 @@ export const fillProductsList = (currentPage: number, sort: string, filters?: an
             dispatch(fillProductsAC(data.results))
             dispatch(setCurrentPageAC(currentPage))
             dispatch(setTotalItemsAC(data.count))
-            dispatch(setSortAC(sort))
         }
         dispatch(isFetchingAC(false))
     }

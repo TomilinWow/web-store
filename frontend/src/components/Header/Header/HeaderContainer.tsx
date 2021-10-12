@@ -6,7 +6,7 @@ import Header from "./Header";
 import {RootState} from "../../../store/store";
 import {setLengthCart} from "../../../store/reducers/cart/card-reducer";
 import {searchProduct} from "../../../store/reducers/product/product-reducer";
-import {getCookie, setCities, setCityAC, setCookie} from "../../../store/reducers/auth/auth-reducer";
+import {getCookie, setCities, setCookie} from "../../../store/reducers/auth/auth-reducer";
 
 type HeaderContainerType = {
     fillCategory: () => void,
@@ -17,15 +17,14 @@ type HeaderContainerType = {
     isModal: boolean,
     getCookie: () => void,
     cities: any[],
-    setCityAC: (city: string, id: number) => void,
     city: string,
     setCities: () => void,
-    setCookie: (id: number) => void
+    setCookie: (city: string) => void
 }
 const HeaderContainer: FC<HeaderContainerType> = React.memo(({
                                                                  fillCategory, categories, cartLength,
                                                                  setLengthCart, searchProduct, isModal,
-                                                                 getCookie, cities, setCityAC, city,
+                                                                 getCookie, cities, city,
                                                                  setCities, setCookie
                                                              }) => {
 
@@ -39,8 +38,7 @@ const HeaderContainer: FC<HeaderContainerType> = React.memo(({
     return (
         <Header searchProduct={searchProduct} categories={categories}
                 cartLength={cartLength} isModal={isModal}
-                cities={cities} setCityAC={setCityAC}
-                city={city} setCookie={setCookie}/>
+                cities={cities} city={city} setCookie={setCookie}/>
     )
 })
 
@@ -57,6 +55,6 @@ export default compose(
     connect(mapStateToProps,
         {
             fillCategory, setLengthCart, searchProduct, getCookie,
-            setCities, setCityAC, setCookie
+            setCities, setCookie
         }),
 )(HeaderContainer)
