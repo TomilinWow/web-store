@@ -18,7 +18,7 @@ class InteractionWithCartPost(APIView):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         cart.add(product)
-        return Response({"status": "add"})
+        return Response(status=200)
 
 class GetCartLength(APIView):
 
@@ -32,7 +32,7 @@ class DeleteCart(APIView):
     def delete(self, request):
         cart = Cart(request)
         cart.clear()
-        return Response({'status': 'delete'})
+        return Response(status=200)
 
 class DeleteCartItem(APIView):
 
@@ -40,7 +40,7 @@ class DeleteCartItem(APIView):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         cart.remove(product)
-        return Response({'status': 'delete'})
+        return Response(status=200)
 
 class TotalPriceCart(APIView):
 
@@ -55,4 +55,4 @@ class DecreaseCountItem(APIView):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         cart.decrease(product)
-        return Response({'status': 'decrease'})
+        return Response(status=200)
